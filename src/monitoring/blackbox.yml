@@ -1,0 +1,14 @@
+modules:
+  http_2xx:
+    prober: http
+    timeout: 10s                  
+    http:
+      valid_http_versions: ["HTTP/1.1", "HTTP/2.0"]   
+      valid_status_codes: [200, 301, 302, 307, 308]   
+      method: GET
+      preferred_ip_protocol: "ip4"
+      ip_protocol_fallback: true   # Пробовать IPv6, если IPv4 не работает
+      follow_redirects: true        # Следовать редиректам (google.com → www.google.com)
+      enable_http2: true            # Явно включаем поддержку HTTP/2
+      tls_config:
+        insecure_skip_verify: false

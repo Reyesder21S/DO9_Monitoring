@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  booking-service:
+    build: ./services/booking-service
+    image: reyesder/booking-service:2
+
+  gateway-service:
+    build: ./services/gateway-service
+    image: reyesder/gateway-service:2
+
+  hotel-service:
+    build: ./services/hotel-service
+    image: reyesder/hotel-service:2
+
+  loyalty-service:
+    build: ./services/loyalty-service
+    image: reyesder/loyalty-service:2
+
+  payment-service:
+    build: ./services/payment-service
+    image: reyesder/payment-service:2
+
+  report-service:
+    build: ./services/report-service
+    image: reyesder/report-service:2
+
+  session-service:
+    build: ./services/session-service
+    image: reyesder/session-service:2

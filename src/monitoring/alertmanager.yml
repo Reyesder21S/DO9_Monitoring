@@ -1,0 +1,31 @@
+global:
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'djoser1990@gmail.com'
+  smtp_auth_username: 'djoser1990@gmail.com'
+  smtp_auth_password: 'kiqj uyle hvvm qhwf'
+  smtp_require_tls: true
+
+route:
+  group_by: ['alertname']
+  group_wait: 5s
+  group_interval: 1m
+  repeat_interval: 4h
+  receiver: 'critical-receiver'
+
+receivers:
+  - name: 'critical-receiver'
+    email_configs:
+      - to: 'djoser1990@gmail.com'
+        send_resolved: true
+    telegram_configs:
+      - bot_token: '8768531272:AAFMChEmOXP1DIabLepSQJXELbkHb0s733Q'
+        chat_id: 520882781
+        send_resolved: true
+        parse_mode: 'HTML'
+        message: |
+          <b>[Alertmanager]</b>
+          {{ range .Alerts }}
+          <b>Status:</b> {{ .Status | toUpper }}
+          <b>Alert:</b> {{ .Labels.alertname }}
+          <b>Summary:</b> {{ .Annotations.summary }}
+          {{ end }}

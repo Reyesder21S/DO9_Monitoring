@@ -1,0 +1,9 @@
+{
+  "name": "Monitoring Tests",
+  "values": [
+    {
+      "key": "API_HOST",
+      "value": "192.168.56.10",
+      "enabled": true    }
+  ]
+}

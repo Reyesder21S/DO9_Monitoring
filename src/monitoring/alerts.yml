@@ -1,0 +1,29 @@
+groups:
+  - name: critical
+    rules:
+      - alert: LowFreeMemory
+        expr: node_memory_MemFree_bytes < 104857600
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Free memory on {{ $labels.instance }} is below 100 MB"
+          description: 'Instance {{ $labels.instance }} has only {{ $value | humanize1024 }}B free memory'
+
+      - alert: HighMemoryUsage
+        expr: container_memory_working_set_bytes{container_label_com_docker_stack_namespace="app"} > 1073741824
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'High memory usage on {{ $labels.instance }}'
+          description: 'Instance {{ $labels.container_label_com_docker_swarm_service_name}} is using {{ $value | humanize1024 }}B of RAM'
+
+      - alert: HighCPUUsage
+        expr: rate(container_cpu_usage_seconds_total{container_label_com_docker_stack_namespace="app"}[1m]) > 0.1
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: 'High CPU usage'
+          description: 'Service {{ $labels.container_label_com_docker_swarm_service_name }} CPU usage is {{ $value | humanize}}'

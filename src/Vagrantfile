@@ -1,0 +1,34 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
+  
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = 4096  
+    vb.cpus = 2       
+  end
+
+  config.vm.define "manager" do |manager|
+      manager.vm.box = "ubuntu/jammy64"
+      manager.vm.hostname = "manager"
+      manager.vm.network "private_network", ip: "192.168.56.10"
+      manager.vm.provision "shell", path: "services/install-docker.sh"
+      manager.vm.provision "shell", path: "services/manager.sh"
+  end
+  config.vm.define "worker01" do |worker|
+      worker.vm.box = "ubuntu/jammy64"
+      worker.vm.hostname = "worker01"
+      worker.vm.network "private_network", ip: "192.168.56.20"
+      worker.vm.provision "shell", path: "services/install-docker.sh"
+      worker.vm.provision "shell", path: "services/worker.sh"
+  end
+  config.vm.define "worker02" do |worker|
+      worker.vm.box = "ubuntu/jammy64"
+      worker.vm.hostname = "worker02"
+      worker.vm.network "private_network", ip: "192.168.56.30"
+      worker.vm.provision "shell", path: "services/install-docker.sh"
+      worker.vm.provision "shell", path: "services/worker.sh"
+
+  end
+end
