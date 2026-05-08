@@ -1,8 +1,8 @@
 global:
   smtp_smarthost: 'smtp.gmail.com:587'
-  smtp_from: 'djoser1990@gmail.com'
-  smtp_auth_username: 'djoser1990@gmail.com'
-  smtp_auth_password: 'kiqj uyle hvvm qhwf'
+  smtp_from: 'd*******@gmail.com'
+  smtp_auth_username: 'd*******@gmail.com'
+  smtp_auth_password: 'kiqj uyle hvvm ****'
   smtp_require_tls: true
 
 route:
@@ -15,11 +15,11 @@ route:
 receivers:
   - name: 'critical-receiver'
     email_configs:
-      - to: 'djoser1990@gmail.com'
+      - to: 'd*******.com'
         send_resolved: true
     telegram_configs:
-      - bot_token: '8768531272:AAFMChEmOXP1DIabLepSQJXELbkHb0s733Q'
-        chat_id: 520882781
+      - bot_token: '8768531272:AAFMChEmOXP1DIabLepSQ*******'
+        chat_id: 52088
         send_resolved: true
         parse_mode: 'HTML'
         message: |
